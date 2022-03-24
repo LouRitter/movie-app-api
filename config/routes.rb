@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   get '/user-movie-data', to: 'members#movies'
 
   get '/movies/search', to: 'movies#search'
-  post '/movies/save', to: 'movies#save'
+  post '/movies', to: 'movies#create'
 
 end

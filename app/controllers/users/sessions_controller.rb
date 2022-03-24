@@ -5,12 +5,6 @@ class Users::SessionsController < Devise::SessionsController
   
     def respond_with(resource, _opts = {})
         @user = current_user.as_json
-        puts request.env['warden-jwt_auth.token'].to_s
-
-        puts @user
-        unless request.env['warden-jwt_auth.token'].blank?
-          @user['accessToken'] = request.env['warden-jwt_auth.token'].to_s
-        end
         render json: @user, status: :ok
     end
   

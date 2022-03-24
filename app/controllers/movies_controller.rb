@@ -1,11 +1,18 @@
 class MoviesController < ApplicationController
+    before_action :authenticate_user!, only: :create
+
     def search
       render json: MovieService.new(params[:query]).search
     end
 
+    def show
+      @movie = Movie.find(params[:id])
+      render json: @movie
+    end
+
     def create
       @movie = Movie.new(movie_params)
-      @current_user.movies << @movie
+      current_user.movies << @movie
       if @movie.save
         render json: @movie
       else
